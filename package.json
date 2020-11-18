@@ -1,0 +1,23 @@
+{
+  "name": "exun",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@zeit/next-sass": "^1.0.1",
+    "axios": "^0.21.0",
+    "chart.js": "^2.9.4",
+    "classnames": "^2.2.6",
+    "next": "10.0.1",
+    "next-compose-plugins": "^2.2.0",
+    "next-svgr": "0.0.2",
+    "react": "17.0.1",
+    "react-chartjs-2": "^2.11.1",
+    "react-dom": "17.0.1",
+    "sass": "^1.27.0"
+  }
+}
