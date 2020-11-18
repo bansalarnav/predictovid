@@ -22,7 +22,7 @@ const Search = ({ onSubmit }) => {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
         />
-        <input type="submit" style={{ visibility: "hidden" }} />
+        <input type="submit" style={{ visibility: "hidden", width: '0' }} />
       </form>
     </div>
   );
