@@ -2,7 +2,7 @@ import styles from "./prediction.scss";
 import { useState, useEffect } from "react";
 
 const Prediction = ({ location }) => {
-  const StatCard = ({ label, value, newCases, show }) => {
+  const StatCard = ({ label, value, newCases, show, style}) => {
     const [casesNew, setCasesNew] = useState(newCases);
     useEffect(() => {
       var decPlaces = Math.pow(10, 2);
@@ -26,7 +26,7 @@ const Prediction = ({ location }) => {
       setCasesNew(value);
     });
     return (
-      <div className={styles.main__stats_card}>
+      <div className={styles.main__stats_card} style={style}>
         <h2>{value}</h2>
         <h4>{show && `+${casesNew}`}</h4>
         <h3>{label}</h3>
@@ -54,7 +54,8 @@ const Prediction = ({ location }) => {
             label="Deceased"
             value="decease"
             show={true}
-            newCases={203487}
+                      newCases={203487}
+                      style={{gridColumn: '2 / span 2'}}
           />
         </div>
         <div className={styles.main__para}>
