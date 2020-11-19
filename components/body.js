@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import stateCodes from "../data/states.json";
 import stateNames from "../data/stateNames.json";
 import Loader from "./loader";
+import Prediction from "./body/prediction";
 
 const Body = () => {
   const [chartData, setChartData] = useState([]);
@@ -27,6 +28,13 @@ const Body = () => {
     axios.get("https://api.covid19india.org/data.json").then((res) => {
       console.log(res.data.cases_time_series);
       setChartData(res.data.cases_time_series);
+      var print;
+      res.data.cases_time_series.forEach((value) => {
+        print == null
+          ? (print = value.totalconfirmed)
+          : (print = print + `, ${value.totalconfirmed}`);
+      });
+      console.log(print);
       setTotal(
         res.data.cases_time_series[res.data.cases_time_series.length - 1]
           .totalconfirmed
@@ -141,28 +149,28 @@ const Body = () => {
             chartData[chartData.length - 1].totaldeceased
         );
         setRecovered(chartData[chartData.length - 1].totalrecovered);
-          setDeceased(chartData[chartData.length - 1].totaldeceased);
-          setTotalGraph(
-            chartData.map((data) => {
-              return {
-                time: data.dateymd,
-                value: data.totalconfirmed,
-              };
-            })
-          );
-          setRecovGraph(
-            chartData.map((data) => {
-              return {
-                time: data.dateymd,
-                value: data.totalrecovered,
-              };
-            })
-          );
-          setDeceaGraph(
-            chartData.map((data) => {
-              return { time: data.dateymd, value: data.totaldeceased };
-            })
-          );
+        setDeceased(chartData[chartData.length - 1].totaldeceased);
+        setTotalGraph(
+          chartData.map((data) => {
+            return {
+              time: data.dateymd,
+              value: data.totalconfirmed,
+            };
+          })
+        );
+        setRecovGraph(
+          chartData.map((data) => {
+            return {
+              time: data.dateymd,
+              value: data.totalrecovered,
+            };
+          })
+        );
+        setDeceaGraph(
+          chartData.map((data) => {
+            return { time: data.dateymd, value: data.totaldeceased };
+          })
+        );
       }
       setSearching(false);
       setFoundResult(true);
@@ -242,6 +250,11 @@ const Body = () => {
                   />
                 </div>
               </div>
+            </div>
+            <div style={{ height: "50px" }}></div>
+            <div className={styles.body__section}>
+                  <h5>{ `Prediction - ${location}`}</h5>
+                  <Prediction location={ location}/>
             </div>
           </div>
         )}

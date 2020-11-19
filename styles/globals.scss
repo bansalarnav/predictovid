@@ -21,3 +21,13 @@ a {
   flex: 1;
 }
 
+
+button {
+  height: 50px;
+  font-size: 16px;
+  font-family: 'Inter';
+  background-color: var(--primary);
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+}

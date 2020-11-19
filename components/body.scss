@@ -8,106 +8,112 @@
   //justify-content: center;
   //align-items: center;
 
-  &__container{
-      display: inline-flex;
+  &__container {
+    display: inline-flex;
   }
 
-  &__container_charts{
+  &__container_charts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  &__location {
+    margin-right: 75%;
+    margin-left: 7%;
+    margin-top: 60px;
+    color: var(--headingColor);
+  }
+
+  &__section {
+    & h5 {
+      margin-left: 8%;
+      padding-left: 10px;
+      margin-bottom: 6px;
+      margin-top: 8px;
+      color: var(--primary);
+      font-size: 18px;
+    }
+  }
+
+  &__stats {
+    display: grid;
+    grid-template-rows: 180px 180px;
+    grid-template-columns: 150px 100px;
+    flex-direction: row;
+    //max-width: 50%;
+    // margin-right: auto;
+    margin-left: 15%;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    margin-right: 120px;
+
+    &__chart_container {
+      background-color: #fff;
+      box-shadow: var(--shadow);
+      margin-left: 100px;
+
+      &:hover {
+        box-shadow: 0 3px 30px rgba(0, 0, 0, 0.1);
+      }
+    }
+    &__chart {
+      height: 200px !important;
+      width: 400px !important;
+      box-shadow: 0 3px 20px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      margin: 10px;
+
+      &:hover {
+        box-shadow: 0 3px 30px rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    &_card {
+      background-color: #fff;
+      box-shadow: 0 3px 20px rgba(0, 0, 0, 0.1);
+      height: 160px;
+      width: 130px;
+      border-radius: 10px;
+      margin-right: 10px;
+      margin-left: 10px;
+      margin-top: 4px;
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       justify-content: center;
-  }
+      align-items: center;
 
-  &__location{
-      margin-right: 75%;
-      margin-left: 7%;
-      margin-top: 60px;
-      color: var(--headingColor);
-  }
-
-  &__section{
-     & h5{
-         margin-left:8%;
-         padding-left: 10px;
-         margin-bottom: 6px;
-         margin-top: 8px;
-         color: var(--primary);
-     }
-  }
-
-  &__stats{
-      display: flex;
-      flex-direction: row;
-      //max-width: 50%;
-     // margin-right: auto;
-      margin-left: 10%;
-      flex-wrap: wrap;
-
-      &__chart_container{
-          background-color: #fff;
-          box-shadow: var(--shadow);
-
-          &:hover{
-            box-shadow:  0 3px 30px rgba(0, 0, 0, 0.1);
-          }
-      }
-      &__chart{
-          height: 200px !important;
-          width: 400px !important;
-          box-shadow: 0 3px 20px rgba(0, 0, 0, 0.1);
-          border-radius: 10px;
-          margin: 10px;
-
-          &:hover{
-            box-shadow:  0 3px 30px rgba(0, 0, 0, 0.1);
-          }
+      &:hover {
+        box-shadow: 0 3px 30px rgba(0, 0, 0, 0.1);
       }
 
-      &_card{
-          background-color: #fff;
-          box-shadow:  0 3px 20px rgba(0, 0, 0, 0.1);;
-          height: 160px;
-          width: 130px;
-          border-radius: 10px;
-          margin-right: 10px;
-          margin-left: 10px;
-          margin-top: 4px;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          
-          &:hover{
-            box-shadow:  0 3px 30px rgba(0, 0, 0, 0.1);
-          }
-
-          & h3{
-              color: rgba(0, 0, 0, 0.4);
-              font-size: 16px;
-          }
-
-          & h2{
-              color: var(--headingColor);
-          }
+      & h3 {
+        color: rgba(0, 0, 0, 0.4);
+        font-size: 16px;
       }
+
+      & h2 {
+        color: var(--headingColor);
+      }
+    }
   }
 }
 
-.sorry{
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.sorry {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 
-    & h1{
-        color: rgba(0,0,0,0.8);
-    }
+  & h1 {
+    color: rgba(0, 0, 0, 0.8);
+  }
 
-    & h5{
-        color: rgba(0,0,0,0.4);
-        font-size: 18px;
-        margin-top: -10px;
-    }
+  & h5 {
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 18px;
+    margin-top: -10px;
+  }
 }
