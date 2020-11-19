@@ -22,6 +22,7 @@ const Body = () => {
   const [totalGraph, setTotalGraph] = useState([]);
   const [recovGraph, setRecovGraph] = useState([]);
   const [deceaGraph, setDeceaGraph] = useState([]);
+  const [activeGraph, setActiveGraph] = useState([]);
   const [stateChartData, setStateChartData] = useState([]);
 
   useEffect(() => {
@@ -34,7 +35,6 @@ const Body = () => {
           ? (print = value.totalconfirmed)
           : (print = print + `, ${value.totalconfirmed}`);
       });
-      console.log(print);
       setTotal(
         res.data.cases_time_series[res.data.cases_time_series.length - 1]
           .totalconfirmed
@@ -57,6 +57,15 @@ const Body = () => {
       );
       axios.get("https://api.covid19india.org/v4/data.json").then((res2) => {
         setStatesData(res2.data);
+        setActiveGraph(
+          res.data.cases_time_series.map((data) => {
+            return {
+              time: data.dateymd,
+              value:
+                data.totalconfirmed - data.totalrecovered - data.totaldeceased,
+            };
+          })
+        );
         setTotalGraph(
           res.data.cases_time_series.map((data) => {
             return {
@@ -121,6 +130,7 @@ const Body = () => {
         var recovered = [];
         var total = [];
         var deceased = [];
+        var active = [];
 
         const dateKeys = Object.keys(stateChartData[stateCode].dates);
         const data = stateChartData[stateCode].dates;
@@ -137,16 +147,35 @@ const Body = () => {
           data[value].total.deceased
             ? deceased.push({ time: value, value: data[value].total.deceased })
             : null;
+          data[value].total.confirmed >= 1
+            ? active.push({
+                time: value,
+                value:
+                  data[value].total.confirmed -
+                  data[value].total.recovered -
+                  data[value].total.deceased,
+              })
+            : null;
         });
         setTotalGraph(total);
         setRecovGraph(recovered);
         setDeceaGraph(deceased);
+        setActiveGraph(active);
       } else {
         setTotal(chartData[chartData.length - 1].totalconfirmed);
         setActive(
           chartData[chartData.length - 1].totalconfirmed -
             chartData[chartData.length - 1].totalrecovered -
             chartData[chartData.length - 1].totaldeceased
+        );
+        setActiveGraph(
+          chartData.map((data) => {
+            return {
+              time: data.dateymd,
+              value:
+                data.totalconfirmed - data.totalrecovered - data.totaldeceased,
+            };
+          })
         );
         setRecovered(chartData[chartData.length - 1].totalrecovered);
         setDeceased(chartData[chartData.length - 1].totaldeceased);
@@ -233,6 +262,12 @@ const Body = () => {
                       data={totalGraph}
                       title="Confirmed"
                     />
+                    <LineChart
+                      color="#f70600"
+                      className={styles.body__stats__chart_container}
+                      data={activeGraph}
+                      title="Active"
+                    />
                   </div>
                   <div className={styles.col}>
                     <LineChart
@@ -241,20 +276,25 @@ const Body = () => {
                       data={recovGraph}
                       title="Recovered"
                     />
+                    <LineChart
+                      color="#adb5bd"
+                      className={styles.body__stats__chart_container}
+                      data={deceaGraph}
+                      title="Deceased"
+                    />
                   </div>
-                  <LineChart
-                    color="#adb5bd"
-                    className={styles.body__stats__chart_container}
-                    data={deceaGraph}
-                    title="Deceased"
-                  />
                 </div>
               </div>
             </div>
             <div style={{ height: "50px" }}></div>
             <div className={styles.body__section}>
-                  <h5>{ `Prediction - ${location}`}</h5>
-                  <Prediction location={ location}/>
+              <h5>{`Prediction - ${location}`}</h5>
+              <Prediction
+                location={location}
+                confirmedData={totalGraph}
+                recoveredData={recovGraph}
+                deceasedData={deceaGraph}
+              />
             </div>
           </div>
         )}

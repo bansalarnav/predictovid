@@ -14,8 +14,9 @@
 
   &__container_charts {
     display: flex;
-    flex-wrap: wrap;
+    //flex-wrap: wrap;
     justify-content: center;
+    flex-direction: row;
   }
 
   &__location {

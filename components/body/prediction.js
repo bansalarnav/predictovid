@@ -1,8 +1,13 @@
 import styles from "./prediction.scss";
 import { useState, useEffect } from "react";
 
-const Prediction = ({ location }) => {
-  const StatCard = ({ label, value, newCases, show, style}) => {
+const Prediction = ({
+  location,
+  confirmedData,
+  recoveredData,
+  deceasedData,
+}) => {
+  const StatCard = ({ label, value, newCases, show, style }) => {
     const [casesNew, setCasesNew] = useState(newCases);
     useEffect(() => {
       var decPlaces = Math.pow(10, 2);
@@ -33,6 +38,57 @@ const Prediction = ({ location }) => {
       </div>
     );
   };
+    const [totalPred, setTotalPred] = useState(0);
+    const [recovPred, setRecovPred] = useState({ total: 0, new: 0 })
+    const [decePred, setDecePred] = useState({total: 0, new: 0})
+  useEffect(() => {
+    var total15DaysData = confirmedData.slice(-7);
+    var totalPercentChange = [];
+    var percentChange =
+      ((total15DaysData[total15DaysData.length - 1].value -
+        total15DaysData[0].value) /
+        total15DaysData[0].value) *
+      100;
+
+    const newCases = Math.round(
+      (percentChange / 100) * total15DaysData[total15DaysData.length - 1].value
+    );
+    const totalCases =
+      newCases + parseInt(total15DaysData[total15DaysData.length - 1].value);
+      setTotalPred({ total: totalCases, new: newCases });
+      
+      var recov15DaysData = recoveredData.slice(-7);
+      var percentRecov =
+        ((recov15DaysData[recov15DaysData.length - 1].value -
+          recov15DaysData[0].value) /
+          recov15DaysData[0].value) *
+          100;
+      
+  
+      const newRecov = Math.round(
+        (percentRecov / 100) * recov15DaysData[recov15DaysData.length - 1].value
+      );
+      const totalRecov =
+        newRecov + parseInt(recov15DaysData[recov15DaysData.length - 1].value);
+      setRecovPred({ total: totalRecov, new: newRecov });
+      
+      var ded15DaysData = deceasedData.slice(-7);
+      var percentded =
+        ((ded15DaysData[ded15DaysData.length - 1].value -
+          ded15DaysData[0].value) /
+          ded15DaysData[0].value) *
+          100;
+      
+      console.log(percentded)
+  
+      const newDed = Math.round(
+        (percentded / 100) * ded15DaysData[ded15DaysData.length - 1].value
+      );
+      const totalDed =
+        newDed + parseInt(recov15DaysData[recov15DaysData.length - 1].value);
+      setDecePred({total: totalDed, new: newDed});
+
+  }, [confirmedData, recoveredData, deceasedData]);
   return (
     <div className={styles.main}>
       <h3>Main</h3>
@@ -40,31 +96,31 @@ const Prediction = ({ location }) => {
         <div className={styles.main__stats}>
           <StatCard
             label="Confirmed"
-            value="total"
+            value={totalPred.total}
             show={true}
-            newCases={102347}
+            newCases={totalPred.new}
           />
           <StatCard
             label="Recovered"
-            value="recovered"
+            value={recovPred.total}
             show={true}
-            newCases={3435}
+            newCases={recovPred.new}
           />
           <StatCard
             label="Deceased"
-            value="decease"
+            value={decePred.total}
             show={true}
-                      newCases={203487}
-                      style={{gridColumn: '2 / span 2'}}
+            newCases={decePred.new}
+            style={{ gridColumn: "2 / span 2" }}
           />
         </div>
         <div className={styles.main__para}>
           Through our predictions we find that-
           <ul>
-            <li>Approx 3204803 cases will be reported in the next week</li>
-            <li>Approx 7038472 will recover from covid in the next week</li>
+            <li>Approx {normalize(totalPred.new)} new cases will be reported in the next week</li>
+            <li>Approx {normalize(recovPred.new)} new people will recover from COVID-19 in the next week</li>
             <li>
-              Approx 93284 will sadly pass away from COVID-19 in the next week
+              Approx {normalize(decePred.new)} will sadly pass away from COVID-19 in the next week
             </li>
           </ul>
         </div>
@@ -99,3 +155,23 @@ const Prediction = ({ location }) => {
 };
 
 export default Prediction;
+
+function normalize(value) {
+    var decPlaces = Math.pow(10, 2);
+      var abbrev = ["K", "M", "B", "T"];
+
+      for (var i = abbrev.length - 1; i >= 0; i--) {
+        var size = Math.pow(10, (i + 1) * 3);
+        if (size <= value) {
+          value = Math.round((value * decPlaces) / size) / decPlaces;
+
+          if (value == 1000 && i < abbrev.length - 1) {
+            value = 1;
+            i++;
+          }
+          value += abbrev[i];
+          break;
+        }
+      }
+      return value
+}
