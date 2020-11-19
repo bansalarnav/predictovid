@@ -8,8 +8,8 @@ const Meta = ({ children }) => {
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
         <meta name="theme-color" content="#0779e4" />
         <link rel="shortcut icon" href="" type="image/x-icon" />
-        <title>PredictIt!</title>
-        <link rel="icon" href="" />
+        <title>Predictovid</title>
+        <link rel="icon" href="/breath.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"

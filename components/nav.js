@@ -2,7 +2,7 @@ import styles from './nav.scss';
 
 const Nav = () => {
     return <div className={styles.nav}>
-      PredictIt!
+      Predictovid
   </div>;
 };
 
