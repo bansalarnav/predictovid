@@ -1,0 +1,30 @@
+.symptoms {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+
+  & div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 3px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: 10px;
+    width: 140px;
+    height: 170px;
+    //padding-top: 20px;
+    color: var(--headingColor);
+
+    & img {
+      height: 64px;
+      width: 64px;
+    }
+
+    & h4 {
+      margin-bottom: 0px;
+      font-size: 18px;
+      text-align: center;
+    }
+  }
+}

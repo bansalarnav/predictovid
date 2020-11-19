@@ -1,9 +1,13 @@
 import styles from "./search.scss";
 import SearchIcon from "../../public/icons/search.svg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Select from "react-select";
+import stateNames from "../../data/stateNames.json";
 
 const Search = ({ onSubmit }) => {
   const [query, setQuery] = useState("");
+  const [options, setOptions] = useState([]);
+
 
   return (
     <div>

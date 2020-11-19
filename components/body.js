@@ -7,6 +7,8 @@ import stateCodes from "../data/states.json";
 import stateNames from "../data/stateNames.json";
 import Loader from "./loader";
 import Prediction from "./body/prediction";
+import Tips from "./body/tips";
+import Symptoms from "./body/symptoms";
 
 const Body = () => {
   const [chartData, setChartData] = useState([]);
@@ -288,7 +290,7 @@ const Body = () => {
             </div>
             <div style={{ height: "50px" }}></div>
             <div className={styles.body__section}>
-              <h5>{`Prediction - ${location}`}</h5>
+              <h5>{`Prediction - ${location}(1 week)`}</h5>
               <Prediction
                 location={location}
                 confirmedData={totalGraph}
@@ -296,8 +298,17 @@ const Body = () => {
                 deceasedData={deceaGraph}
               />
             </div>
+            <div className={styles.body__section}>
+              <h5>Some Tips to prevent COVID-19</h5>
+              <Tips />
+            </div>
+            <div className={styles.body__section}>
+              <h5>COVID-19 Symptoms</h5>
+              <Symptoms />
+            </div>
           </div>
-        )}
+            )}
+        <h4 className={styles.bottom}>Made with ❤ by eSpice</h4>
       </div>
     );
   }

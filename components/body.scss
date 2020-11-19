@@ -10,6 +10,7 @@
 
   &__container {
     display: inline-flex;
+    align-items: center;
   }
 
   &__container_charts {
@@ -117,4 +118,13 @@
     font-size: 18px;
     margin-top: -10px;
   }
+}
+
+.bottom{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 10px;
+  color: var(--primary);
 }
