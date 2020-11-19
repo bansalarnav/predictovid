@@ -149,6 +149,14 @@ const Body = () => {
           data[value].total.deceased
             ? deceased.push({ time: value, value: data[value].total.deceased })
             : null;
+          console.log(
+            data[value].total.confirmed -
+              data[value].total.recovered -
+              data[value].total.deceased
+          );
+          !Number.isNaN(                  data[value].total.confirmed -
+            data[value].total.recovered -
+            data[value].total.deceased) ?
           data[value].total.confirmed >= 1
             ? active.push({
                 time: value,
@@ -157,7 +165,7 @@ const Body = () => {
                   data[value].total.recovered -
                   data[value].total.deceased,
               })
-            : null;
+            : null : null
         });
         setTotalGraph(total);
         setRecovGraph(recovered);
@@ -290,7 +298,7 @@ const Body = () => {
             </div>
             <div style={{ height: "50px" }}></div>
             <div className={styles.body__section}>
-              <h5>{`Prediction - ${location}(1 week)`}</h5>
+              <h5>{`Prediction - ${location} (1 week)`}</h5>
               <Prediction
                 location={location}
                 confirmedData={totalGraph}
@@ -307,7 +315,7 @@ const Body = () => {
               <Symptoms />
             </div>
           </div>
-            )}
+        )}
         <h4 className={styles.bottom}>Made with ❤ by eSpice</h4>
       </div>
     );
