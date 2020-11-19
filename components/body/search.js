@@ -12,13 +12,15 @@ const Search = ({ onSubmit }) => {
 			...provided,
 			padding: '10',
       borderRadius: 10,
+      border: 'none !important'
 		}),
 
 		control: (provided) => ({
 			...provided,
       height: 60,
       width: 390,
-      border: 'none'
+      border: '0px !important',
+      boxShadow: 'none'
 		}),
   };
 
@@ -34,15 +36,9 @@ const Search = ({ onSubmit }) => {
   }, [])
   
   return (
-    <div>
-      <form
-        className={styles.search}
-        onSubmit={(e) => {
-          e.preventDefault();
-          console.log(query);
-          onSubmit(query);
-        }}
-      >
+    <div
+      className={styles.search}
+    >
         <SearchIcon />
         <Select
           dropdownIndicator={<SearchIcon />}
@@ -52,14 +48,6 @@ const Search = ({ onSubmit }) => {
           options={options}
           onChange={(value) => onSubmit(value.value)}
         />
-        {/* <input
-                  className={styles.search__box}
-                  placeholder="Search your state..."
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-        />
-        <input type="submit" style={{ visibility: "hidden", width: '0' }} /> */}
-      </form>
     </div>
   );
 };

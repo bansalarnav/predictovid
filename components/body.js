@@ -154,18 +154,21 @@ const Body = () => {
               data[value].total.recovered -
               data[value].total.deceased
           );
-          !Number.isNaN(                  data[value].total.confirmed -
-            data[value].total.recovered -
-            data[value].total.deceased) ?
-          data[value].total.confirmed >= 1
-            ? active.push({
-                time: value,
-                value:
-                  data[value].total.confirmed -
-                  data[value].total.recovered -
-                  data[value].total.deceased,
-              })
-            : null : null
+          !Number.isNaN(
+            data[value].total.confirmed -
+              data[value].total.recovered -
+              data[value].total.deceased
+          )
+            ? data[value].total.confirmed >= 1
+              ? active.push({
+                  time: value,
+                  value:
+                    data[value].total.confirmed -
+                    data[value].total.recovered -
+                    data[value].total.deceased,
+                })
+              : null
+            : null;
         });
         setTotalGraph(total);
         setRecovGraph(recovered);
@@ -316,7 +319,10 @@ const Body = () => {
             </div>
           </div>
         )}
-        <h4 className={styles.bottom}>Made with ❤ by eSpice</h4>
+
+        <h4 className={styles.bottom}>
+          Made with ❤ by eSpice
+        </h4>
       </div>
     );
   }
