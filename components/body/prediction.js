@@ -126,7 +126,7 @@ const Prediction = ({
               COVID-19 in the next week
             </li>
             <li>
-              Approx {normalize(decePred.new)} will sadly pass away from
+              Approx {normalize(decePred.new)} people will sadly pass away from
               COVID-19 in the next week
             </li>
           </ul>
